@@ -1,0 +1,11 @@
+services:
+  radar:
+    build: .
+    container_name: ctwa-radar
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "3000:3000"
+    volumes:
+      # O banco vive fora do container: derrubar e subir de novo nao perde lead.
+      - ./data:/app/data

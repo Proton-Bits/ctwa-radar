@@ -1,0 +1,21 @@
+{
+  "name": "ctwa-radar",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Monitoramento de leads Click-to-WhatsApp: captura o ctwa_clid, confirma a entrada no grupo e devolve a conversao para a API de Conversoes da Meta.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node --test",
+    "seed": "node scripts/seed.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.2.0",
+    "express": "^5.1.0"
+  }
+}

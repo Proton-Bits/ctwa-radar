@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CTWA Radar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">
+    <h1>CTWA Radar</h1>
+    <span>anúncio → grupo → meta</span>
+  </div>
+
+  <div class="periodo" role="group" aria-label="Período">
+    <button data-periodo="24h" aria-pressed="true">24h</button>
+    <button data-periodo="7d" aria-pressed="false">7 dias</button>
+    <button data-periodo="30d" aria-pressed="false">30 dias</button>
+  </div>
+
+  <div class="dots" id="saude">
+    <span class="dot"><i></i>carregando…</span>
+  </div>
+</div>
+
+<main>
+  <div id="avisos"></div>
+
+  <section class="kpis" id="kpis"></section>
+
+  <section class="card">
+    <header>
+      <h2>Cliques e entradas por hora</h2>
+      <span class="hint">a distância entre as duas linhas é o que você está perdendo</span>
+    </header>
+    <div class="chart"><svg id="grafico" viewBox="0 0 900 220" role="img" aria-label="Cliques e entradas no grupo por hora"></svg></div>
+    <div class="legend">
+      <span><i style="background:var(--accent)"></i>cliques no anúncio</span>
+      <span><i style="background:var(--ok)"></i>entraram no grupo</span>
+    </div>
+  </section>
+
+  <section class="card">
+    <header>
+      <h2>Leads</h2>
+      <span class="hint" id="hintLeads"></span>
+      <div class="filtros" role="group" aria-label="Filtro de status">
+        <button data-status="todos" aria-pressed="true">todos</button>
+        <button data-status="entrou" aria-pressed="false">entrou</button>
+        <button data-status="aguardando" aria-pressed="false">aguardando</button>
+        <button data-status="perdido" aria-pressed="false">perdido</button>
+      </div>
+    </header>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Lead</th><th>Anúncio</th><th>Origem</th>
+            <th>Clicou</th><th>Entrou</th><th>Status</th><th>ctwa_clid</th>
+          </tr>
+        </thead>
+        <tbody id="tbLeads"></tbody>
+      </table>
+    </div>
+    <div class="vazio" id="vazioLeads" hidden>Nenhum lead no período.</div>
+  </section>
+
+  <div class="grid2">
+    <section class="card">
+      <header>
+        <h2>Eventos enviados à Meta</h2>
+        <span class="hint">dedupe por event_id</span>
+      </header>
+      <div class="scroll">
+        <table>
+          <thead>
+            <tr><th>Evento</th><th>Status</th><th>HTTP</th><th>Tent.</th><th>Quando</th><th></th></tr>
+          </thead>
+          <tbody id="tbEventos"></tbody>
+        </table>
+      </div>
+      <div class="vazio" id="vazioEventos" hidden>Nada enviado ainda.</div>
+    </section>
+
+    <section class="card">
+      <header>
+        <h2>Por anúncio</h2>
+        <span class="hint">taxa de entrada</span>
+      </header>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Anúncio</th><th>Cliques</th><th>Entrou</th><th>Taxa</th></tr></thead>
+          <tbody id="tbAnuncios"></tbody>
+        </table>
+      </div>
+      <div class="vazio" id="vazioAnuncios" hidden>Sem dados de anúncio no período.</div>
+    </section>
+  </div>
+
+  <section class="card">
+    <header>
+      <h2>Log do webhook</h2>
+      <span class="hint">últimos eventos crus recebidos da Evolution</span>
+    </header>
+    <div class="log" id="log"></div>
+  </section>
+
+  <footer class="rodape">
+    <span id="atualizado">—</span>
+    <span>atualiza sozinho a cada 15s</span>
+    <span><code>POST /api/conversao</code> para plugar o funil de venda</span>
+  </footer>
+</main>
+
+<script src="./app.js"></script>
+</body>
+</html>
